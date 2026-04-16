@@ -1,0 +1,978 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BANGALORE.SH — tech events, 8-bit edition</title>
+<meta name="description" content="Every tech event in Bangalore, rendered in 8-bit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wcrh34ay3f");
+</script>
+<style>
+  :root{
+    --bg:#0a0420;
+    --bg2:#1a0b3a;
+    --ink:#f7f7f7;
+    --dim:#8a7ec8;
+    --red:#e84444;
+    --yellow:#fcd828;
+    --green:#4cd964;
+    --blue:#5c94fc;
+    --pink:#ff77a8;
+    --purple:#7e57ff;
+    --brown:#8b4513;
+    --border:#f7f7f7;
+    --shadow:#000;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html,body{background:var(--bg);color:var(--ink);font-family:'VT323',monospace;font-size:20px;line-height:1.4;image-rendering:pixelated;-webkit-font-smoothing:none;-moz-osx-font-smoothing:grayscale}
+
+  body{
+    background:
+      radial-gradient(2px 2px at 20% 12%, #fff 50%, transparent 51%),
+      radial-gradient(2px 2px at 38% 7%, #fff 50%, transparent 51%),
+      radial-gradient(2px 2px at 55% 18%, #fff 50%, transparent 51%),
+      radial-gradient(2px 2px at 72% 5%, #fff 50%, transparent 51%),
+      radial-gradient(2px 2px at 88% 14%, #fff 50%, transparent 51%),
+      radial-gradient(2px 2px at 8% 24%, #fff 50%, transparent 51%),
+      radial-gradient(2px 2px at 93% 27%, #fff 50%, transparent 51%),
+      linear-gradient(180deg,var(--bg) 0%, var(--bg2) 60%, #2a1560 100%);
+    background-attachment:fixed;
+    min-height:100vh;
+    padding:0 0 80px;
+  }
+
+  .px{font-family:'Press Start 2P',monospace;font-smooth:never;-webkit-font-smoothing:none}
+
+  /* 8-bit dialog box — chunky NES-style border using layered box-shadows */
+  .box{
+    position:relative;
+    background:#000;
+    border:4px solid var(--ink);
+    box-shadow:
+      0 0 0 4px #000,
+      0 0 0 8px var(--ink),
+      8px 8px 0 8px var(--shadow);
+    padding:20px;
+  }
+  .box::before,.box::after{
+    content:"";position:absolute;width:8px;height:8px;background:#000;
+  }
+  .box::before{top:-4px;left:-4px}
+  .box::after{top:-4px;right:-4px}
+
+  /* Pixel button style */
+  .btn{
+    display:inline-block;
+    font-family:'Press Start 2P',monospace;
+    font-size:11px;
+    padding:10px 14px;
+    background:var(--yellow);
+    color:#000;
+    text-decoration:none;
+    border:4px solid #000;
+    box-shadow:4px 4px 0 0 var(--ink);
+    letter-spacing:1px;
+  }
+  .btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 0 var(--ink)}
+  .btn:active{transform:translate(4px,4px);box-shadow:0 0 0 0 var(--ink)}
+
+  /* ---------- HEADER / HERO ---------- */
+  header{padding:28px 16px 0;text-align:center}
+  .title{
+    font-family:'Press Start 2P',monospace;
+    color:var(--yellow);
+    font-size:clamp(22px,5vw,44px);
+    text-shadow:4px 4px 0 var(--red), 8px 8px 0 #000;
+    letter-spacing:2px;
+    margin:0 auto 8px;
+    line-height:1.2;
+  }
+  .tagline{
+    font-family:'Press Start 2P',monospace;
+    color:var(--ink);
+    font-size:clamp(10px,1.5vw,12px);
+    letter-spacing:2px;
+    margin:10px 0 20px;
+  }
+  .tagline .blink{animation:blink 1s steps(2) infinite;color:var(--green)}
+  @keyframes blink{50%{opacity:0}}
+
+  /* hero svg wrapper */
+  .hero{
+    max-width:1100px;margin:0 auto;padding:0 16px;
+  }
+  .hero-frame{
+    background:linear-gradient(180deg,#0c0634 0%,#1e1060 50%,#4b2a99 80%,#2d1760 100%);
+    border:6px solid var(--ink);
+    box-shadow:0 0 0 6px #000, 12px 12px 0 6px var(--red);
+    padding:0;
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-frame svg{display:block;width:100%;height:auto;image-rendering:pixelated}
+
+  /* ticker */
+  .ticker{
+    margin-top:32px;
+    overflow:hidden;
+    white-space:nowrap;
+    border-top:4px solid var(--ink);
+    border-bottom:4px solid var(--ink);
+    background:#000;
+    padding:10px 0;
+    font-family:'Press Start 2P',monospace;
+    font-size:12px;
+    color:var(--green);
+  }
+  .ticker span{display:inline-block;padding-left:100%;animation:scroll 28s linear infinite}
+  .ticker b{color:var(--yellow);margin:0 8px}
+  .ticker i{color:var(--pink);font-style:normal;margin:0 16px}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+  /* ---------- MAIN ---------- */
+  main{max-width:1100px;margin:40px auto 0;padding:0 16px}
+
+  .section-head{
+    display:flex;align-items:center;gap:16px;margin:48px 0 20px;
+  }
+  .section-head h2{
+    font-family:'Press Start 2P',monospace;
+    font-size:clamp(14px,2.5vw,22px);
+    letter-spacing:2px;
+  }
+  .section-head .chip{
+    font-family:'Press Start 2P',monospace;
+    font-size:10px;
+    padding:6px 10px;
+    border:3px solid var(--ink);
+    background:#000;
+  }
+  .chip.up{color:var(--green)}
+  .chip.past{color:var(--dim)}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:28px;
+  }
+
+  /* event card — NES dialog */
+  .card{
+    position:relative;
+    background:#000;
+    border:4px solid var(--ink);
+    box-shadow:6px 6px 0 0 var(--red);
+    padding:16px 16px 18px;
+    transition:transform .1s steps(2), box-shadow .1s steps(2);
+  }
+  .card:hover{transform:translate(-2px,-2px);box-shadow:10px 10px 0 0 var(--red)}
+
+  .card.upcoming{box-shadow:6px 6px 0 0 var(--green)}
+  .card.upcoming:hover{box-shadow:10px 10px 0 0 var(--green)}
+
+  .card .date{
+    font-family:'Press Start 2P',monospace;
+    font-size:11px;
+    color:var(--yellow);
+    margin-bottom:8px;
+    letter-spacing:1px;
+  }
+  .card h3{
+    font-family:'Press Start 2P',monospace;
+    font-size:13px;
+    color:var(--ink);
+    line-height:1.5;
+    margin-bottom:12px;
+  }
+  .card p{font-size:18px;color:#d8d2f0;margin-bottom:14px;min-height:40px}
+  .card .row{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+  .card .venue{font-size:16px;color:var(--dim)}
+  .card .status{
+    font-family:'Press Start 2P',monospace;
+    font-size:9px;
+    padding:5px 8px;
+    border:3px solid;
+  }
+  .status.up{color:var(--green);border-color:var(--green);background:#003311}
+  .status.past{color:var(--dim);border-color:var(--dim);background:#110822}
+  .status.live{color:#000;border-color:var(--yellow);background:var(--yellow);animation:flash 1s steps(2) infinite}
+  @keyframes flash{50%{background:var(--red);color:#fff;border-color:var(--red)}}
+
+  .card.live{box-shadow:6px 6px 0 0 var(--yellow);border-color:var(--yellow)}
+  .card.live:hover{box-shadow:10px 10px 0 0 var(--yellow)}
+
+  .card.past{opacity:.85;filter:saturate(.7)}
+  .card.past h3{color:#c9c3e3}
+
+  /* category pill on card */
+  .cat{
+    display:inline-block;
+    font-family:'Press Start 2P',monospace;
+    font-size:8px;
+    padding:4px 6px;
+    margin-bottom:10px;
+    letter-spacing:1px;
+    border:2px solid;
+  }
+  .cat-hackathon{color:var(--red);border-color:var(--red);background:#2a0505}
+  .cat-meetup{color:var(--pink);border-color:var(--pink);background:#2a0a1c}
+  .cat-talk{color:var(--blue);border-color:var(--blue);background:#061a3a}
+  .cat-conference{color:var(--purple);border-color:var(--purple);background:#15082a}
+  .cat-summit{color:var(--yellow);border-color:var(--yellow);background:#2a2205}
+  .cat-workshop{color:var(--green);border-color:var(--green);background:#052a12}
+
+  /* filter bar */
+  .filters{
+    display:flex;flex-wrap:wrap;gap:10px;
+    margin:20px 0 8px;
+    padding:14px;
+    background:#000;
+    border:4px solid var(--ink);
+    box-shadow:6px 6px 0 0 var(--purple);
+  }
+  .filter-btn{
+    font-family:'Press Start 2P',monospace;
+    font-size:10px;
+    padding:8px 10px;
+    background:#1a0b3a;
+    color:var(--ink);
+    border:3px solid var(--ink);
+    cursor:pointer;
+    letter-spacing:1px;
+    transition:none;
+  }
+  .filter-btn:hover{background:var(--purple);color:#fff}
+  .filter-btn.active{background:var(--yellow);color:#000;border-color:var(--yellow)}
+  .filter-label{
+    font-family:'Press Start 2P',monospace;
+    font-size:10px;
+    color:var(--dim);
+    align-self:center;
+    margin-right:6px;
+    letter-spacing:1px;
+  }
+
+  .card.hidden{display:none}
+
+  /* pixel icon bar */
+  .icon{
+    width:28px;height:28px;display:inline-block;vertical-align:middle;margin-right:8px;
+    image-rendering:pixelated;
+  }
+
+  /* footer */
+  footer{
+    text-align:center;margin-top:80px;padding:0 16px;
+    font-family:'Press Start 2P',monospace;font-size:10px;color:var(--dim);
+    line-height:2;
+  }
+  footer a{color:var(--yellow);text-decoration:none;border-bottom:2px solid var(--yellow)}
+  footer .heart{color:var(--red);animation:pulse 1s steps(2) infinite}
+  @keyframes pulse{50%{opacity:.3}}
+
+  /* scanline overlay — very subtle */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;
+    background:repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0px,
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,.08) 3px,
+      rgba(0,0,0,.08) 3px
+    );
+    mix-blend-mode:multiply;
+  }
+
+  @media(max-width:640px){
+    .hero-frame{border-width:4px;box-shadow:0 0 0 4px #000,8px 8px 0 4px var(--red)}
+    .box{padding:14px}
+    .card{padding:14px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 class="title">BANGALORE.SH</h1>
+  <div class="tagline">PRESS &gt; START &nbsp; <span class="blink">_</span></div>
+
+  <div class="hero">
+    <div class="hero-frame">
+      <!-- 8-BIT BANGALORE SKYLINE (SVG pixel art) -->
+      <!-- viewBox = 160 x 80 pixels, each unit = 1 "pixel" -->
+      <svg viewBox="0 0 160 80" preserveAspectRatio="xMidYMid meet" shape-rendering="crispEdges" aria-label="8-bit pixel art skyline of Bangalore at dusk">
+        <!-- sky gradient bands -->
+        <rect x="0" y="0" width="160" height="20" fill="#1a0b3a"/>
+        <rect x="0" y="20" width="160" height="10" fill="#3a1a6e"/>
+        <rect x="0" y="30" width="160" height="8" fill="#6a2aa0"/>
+        <rect x="0" y="38" width="160" height="8" fill="#c24a7a"/>
+        <rect x="0" y="46" width="160" height="6" fill="#e87e3c"/>
+        <rect x="0" y="52" width="160" height="4" fill="#f5b942"/>
+
+        <!-- stars -->
+        <rect x="10" y="4" width="1" height="1" fill="#fff"/>
+        <rect x="22" y="8" width="1" height="1" fill="#fff"/>
+        <rect x="35" y="3" width="1" height="1" fill="#fff"/>
+        <rect x="48" y="10" width="1" height="1" fill="#fff"/>
+        <rect x="62" y="6" width="1" height="1" fill="#fff"/>
+        <rect x="78" y="2" width="1" height="1" fill="#fff"/>
+        <rect x="92" y="9" width="1" height="1" fill="#fff"/>
+        <rect x="112" y="5" width="1" height="1" fill="#fff"/>
+        <rect x="128" y="11" width="1" height="1" fill="#fff"/>
+        <rect x="144" y="4" width="1" height="1" fill="#fff"/>
+        <rect x="152" y="14" width="1" height="1" fill="#fff"/>
+
+        <!-- sun/moon -->
+        <g>
+          <rect x="118" y="14" width="14" height="2" fill="#fcd828"/>
+          <rect x="116" y="16" width="18" height="2" fill="#fcd828"/>
+          <rect x="115" y="18" width="20" height="6" fill="#fcd828"/>
+          <rect x="116" y="24" width="18" height="2" fill="#fcd828"/>
+          <rect x="118" y="26" width="14" height="2" fill="#fcd828"/>
+          <!-- sun highlight -->
+          <rect x="120" y="18" width="3" height="2" fill="#fff6b0"/>
+          <rect x="118" y="20" width="2" height="2" fill="#fff6b0"/>
+        </g>
+
+        <!-- distant hills -->
+        <polygon points="0,56 20,48 40,54 60,46 80,52 100,44 120,50 140,46 160,54 160,60 0,60" fill="#3a1a6e"/>
+
+        <!-- back row buildings (darker silhouette) -->
+        <g fill="#1a0b3a">
+          <rect x="2" y="50" width="10" height="14"/>
+          <rect x="14" y="46" width="8" height="18"/>
+          <rect x="24" y="52" width="6" height="12"/>
+          <rect x="148" y="48" width="10" height="16"/>
+          <rect x="140" y="52" width="6" height="12"/>
+        </g>
+
+        <!-- ============ VIDHANA SOUDHA (central icon) ============ -->
+        <!-- main podium -->
+        <rect x="58" y="52" width="44" height="3" fill="#d4b483"/>
+        <rect x="58" y="55" width="44" height="1" fill="#a88a5b"/>
+
+        <!-- main building body -->
+        <rect x="60" y="44" width="40" height="11" fill="#e8c896"/>
+        <rect x="60" y="44" width="40" height="1" fill="#fff0c8"/>
+        <rect x="60" y="54" width="40" height="1" fill="#a88a5b"/>
+
+        <!-- columns (pillars) -->
+        <rect x="63" y="46" width="1" height="8" fill="#a88a5b"/>
+        <rect x="67" y="46" width="1" height="8" fill="#a88a5b"/>
+        <rect x="71" y="46" width="1" height="8" fill="#a88a5b"/>
+        <rect x="75" y="46" width="1" height="8" fill="#a88a5b"/>
+        <rect x="85" y="46" width="1" height="8" fill="#a88a5b"/>
+        <rect x="89" y="46" width="1" height="8" fill="#a88a5b"/>
+        <rect x="93" y="46" width="1" height="8" fill="#a88a5b"/>
+        <rect x="97" y="46" width="1" height="8" fill="#a88a5b"/>
+
+        <!-- central archway entrance -->
+        <rect x="78" y="47" width="4" height="7" fill="#5b3a1f"/>
+        <rect x="79" y="46" width="2" height="1" fill="#5b3a1f"/>
+
+        <!-- side towers -->
+        <rect x="56" y="40" width="4" height="15" fill="#e8c896"/>
+        <rect x="56" y="40" width="4" height="1" fill="#fff0c8"/>
+        <rect x="57" y="42" width="2" height="2" fill="#a88a5b"/>
+        <rect x="100" y="40" width="4" height="15" fill="#e8c896"/>
+        <rect x="100" y="40" width="4" height="1" fill="#fff0c8"/>
+        <rect x="101" y="42" width="2" height="2" fill="#a88a5b"/>
+
+        <!-- small side domes -->
+        <rect x="56" y="38" width="4" height="2" fill="#d4b483"/>
+        <rect x="57" y="37" width="2" height="1" fill="#e8c896"/>
+        <rect x="100" y="38" width="4" height="2" fill="#d4b483"/>
+        <rect x="101" y="37" width="2" height="1" fill="#e8c896"/>
+        <!-- flag poles -->
+        <rect x="58" y="35" width="1" height="2" fill="#a88a5b"/>
+        <rect x="102" y="35" width="1" height="2" fill="#a88a5b"/>
+
+        <!-- central dome structure -->
+        <rect x="72" y="40" width="16" height="4" fill="#e8c896"/>
+        <rect x="72" y="40" width="16" height="1" fill="#fff0c8"/>
+        <rect x="74" y="38" width="12" height="2" fill="#d4b483"/>
+        <!-- dome -->
+        <rect x="76" y="34" width="8" height="4" fill="#d4b483"/>
+        <rect x="74" y="36" width="12" height="2" fill="#d4b483"/>
+        <rect x="77" y="32" width="6" height="2" fill="#e8c896"/>
+        <rect x="78" y="30" width="4" height="2" fill="#e8c896"/>
+        <rect x="79" y="29" width="2" height="1" fill="#fff0c8"/>
+        <!-- dome highlight -->
+        <rect x="78" y="33" width="2" height="1" fill="#fff0c8"/>
+        <!-- flag on top -->
+        <rect x="79" y="26" width="1" height="3" fill="#a88a5b"/>
+        <rect x="80" y="26" width="3" height="2" fill="#e84444"/>
+
+        <!-- windows on main body -->
+        <rect x="61" y="47" width="1" height="2" fill="#5c94fc"/>
+        <rect x="61" y="51" width="1" height="2" fill="#5c94fc"/>
+        <rect x="65" y="47" width="1" height="2" fill="#5c94fc"/>
+        <rect x="65" y="51" width="1" height="2" fill="#5c94fc"/>
+        <rect x="69" y="47" width="1" height="2" fill="#5c94fc"/>
+        <rect x="69" y="51" width="1" height="2" fill="#5c94fc"/>
+        <rect x="73" y="47" width="1" height="2" fill="#5c94fc"/>
+        <rect x="73" y="51" width="1" height="2" fill="#5c94fc"/>
+        <rect x="87" y="47" width="1" height="2" fill="#5c94fc"/>
+        <rect x="87" y="51" width="1" height="2" fill="#5c94fc"/>
+        <rect x="91" y="47" width="1" height="2" fill="#5c94fc"/>
+        <rect x="91" y="51" width="1" height="2" fill="#5c94fc"/>
+        <rect x="95" y="47" width="1" height="2" fill="#5c94fc"/>
+        <rect x="95" y="51" width="1" height="2" fill="#5c94fc"/>
+        <rect x="99" y="47" width="1" height="2" fill="#5c94fc"/>
+        <rect x="99" y="51" width="1" height="2" fill="#5c94fc"/>
+
+        <!-- ============ UB CITY TWIN TOWERS (left) ============ -->
+        <rect x="30" y="34" width="8" height="22" fill="#2d4a7c"/>
+        <rect x="30" y="34" width="8" height="1" fill="#5c94fc"/>
+        <rect x="30" y="33" width="2" height="1" fill="#2d4a7c"/>
+        <rect x="36" y="33" width="2" height="1" fill="#2d4a7c"/>
+        <rect x="32" y="32" width="4" height="1" fill="#2d4a7c"/>
+        <!-- windows grid -->
+        <g fill="#fcd828">
+          <rect x="31" y="36" width="1" height="1"/><rect x="33" y="36" width="1" height="1"/><rect x="35" y="36" width="1" height="1"/><rect x="37" y="36" width="1" height="1"/>
+          <rect x="31" y="38" width="1" height="1"/><rect x="35" y="38" width="1" height="1"/><rect x="37" y="38" width="1" height="1"/>
+          <rect x="33" y="40" width="1" height="1"/><rect x="35" y="40" width="1" height="1"/>
+          <rect x="31" y="42" width="1" height="1"/><rect x="33" y="42" width="1" height="1"/><rect x="37" y="42" width="1" height="1"/>
+          <rect x="31" y="44" width="1" height="1"/><rect x="35" y="44" width="1" height="1"/>
+          <rect x="33" y="46" width="1" height="1"/><rect x="37" y="46" width="1" height="1"/>
+          <rect x="31" y="48" width="1" height="1"/><rect x="35" y="48" width="1" height="1"/><rect x="37" y="48" width="1" height="1"/>
+          <rect x="33" y="50" width="1" height="1"/><rect x="35" y="50" width="1" height="1"/>
+          <rect x="31" y="52" width="1" height="1"/><rect x="37" y="52" width="1" height="1"/>
+        </g>
+
+        <rect x="40" y="40" width="6" height="16" fill="#2d4a7c"/>
+        <rect x="40" y="40" width="6" height="1" fill="#5c94fc"/>
+        <g fill="#fcd828">
+          <rect x="41" y="42" width="1" height="1"/><rect x="43" y="42" width="1" height="1"/><rect x="45" y="42" width="1" height="1"/>
+          <rect x="41" y="44" width="1" height="1"/><rect x="45" y="44" width="1" height="1"/>
+          <rect x="43" y="46" width="1" height="1"/>
+          <rect x="41" y="48" width="1" height="1"/><rect x="43" y="48" width="1" height="1"/>
+          <rect x="45" y="50" width="1" height="1"/>
+          <rect x="41" y="52" width="1" height="1"/><rect x="43" y="52" width="1" height="1"/>
+        </g>
+
+        <!-- tech park mid buildings -->
+        <rect x="47" y="46" width="6" height="10" fill="#4a3570"/>
+        <g fill="#fcd828">
+          <rect x="48" y="48" width="1" height="1"/><rect x="50" y="48" width="1" height="1"/><rect x="52" y="48" width="1" height="1"/>
+          <rect x="48" y="50" width="1" height="1"/><rect x="52" y="50" width="1" height="1"/>
+          <rect x="50" y="52" width="1" height="1"/>
+        </g>
+
+        <!-- ============ TECH PARKS (right side) ============ -->
+        <rect x="108" y="38" width="7" height="18" fill="#3a1a6e"/>
+        <rect x="108" y="38" width="7" height="1" fill="#7e57ff"/>
+        <g fill="#fcd828">
+          <rect x="109" y="40" width="1" height="1"/><rect x="111" y="40" width="1" height="1"/><rect x="113" y="40" width="1" height="1"/>
+          <rect x="109" y="42" width="1" height="1"/><rect x="113" y="42" width="1" height="1"/>
+          <rect x="111" y="44" width="1" height="1"/>
+          <rect x="109" y="46" width="1" height="1"/><rect x="113" y="46" width="1" height="1"/>
+          <rect x="111" y="48" width="1" height="1"/>
+          <rect x="109" y="50" width="1" height="1"/><rect x="113" y="50" width="1" height="1"/>
+          <rect x="111" y="52" width="1" height="1"/>
+        </g>
+        <!-- antenna -->
+        <rect x="111" y="34" width="1" height="4" fill="#e84444"/>
+        <rect x="111" y="33" width="1" height="1" fill="#fcd828"/>
+
+        <!-- curved facade building (ITPL-ish) -->
+        <rect x="117" y="44" width="10" height="12" fill="#4a3570"/>
+        <rect x="117" y="43" width="10" height="1" fill="#6a4aa0"/>
+        <rect x="118" y="42" width="8" height="1" fill="#6a4aa0"/>
+        <rect x="119" y="41" width="6" height="1" fill="#4a3570"/>
+        <g fill="#5c94fc">
+          <rect x="118" y="45" width="1" height="1"/><rect x="120" y="45" width="1" height="1"/><rect x="122" y="45" width="1" height="1"/><rect x="124" y="45" width="1" height="1"/><rect x="126" y="45" width="1" height="1"/>
+          <rect x="118" y="47" width="1" height="1"/><rect x="122" y="47" width="1" height="1"/><rect x="126" y="47" width="1" height="1"/>
+          <rect x="120" y="49" width="1" height="1"/><rect x="124" y="49" width="1" height="1"/>
+          <rect x="118" y="51" width="1" height="1"/><rect x="122" y="51" width="1" height="1"/><rect x="126" y="51" width="1" height="1"/>
+          <rect x="120" y="53" width="1" height="1"/><rect x="124" y="53" width="1" height="1"/>
+        </g>
+
+        <!-- small buildings -->
+        <rect x="129" y="48" width="5" height="8" fill="#2d4a7c"/>
+        <g fill="#fcd828">
+          <rect x="130" y="50" width="1" height="1"/><rect x="132" y="50" width="1" height="1"/>
+          <rect x="130" y="52" width="1" height="1"/><rect x="132" y="52" width="1" height="1"/>
+        </g>
+
+        <rect x="135" y="44" width="5" height="12" fill="#3a1a6e"/>
+        <g fill="#fcd828">
+          <rect x="136" y="46" width="1" height="1"/><rect x="138" y="46" width="1" height="1"/>
+          <rect x="136" y="48" width="1" height="1"/>
+          <rect x="138" y="50" width="1" height="1"/>
+          <rect x="136" y="52" width="1" height="1"/><rect x="138" y="52" width="1" height="1"/>
+        </g>
+
+        <!-- trees (palm silhouettes) - Lalbagh vibes -->
+        <g>
+          <!-- tree 1 -->
+          <rect x="4" y="54" width="1" height="6" fill="#2a1a0a"/>
+          <rect x="2" y="52" width="1" height="1" fill="#0f5f2a"/>
+          <rect x="3" y="51" width="1" height="2" fill="#0f5f2a"/>
+          <rect x="4" y="50" width="1" height="3" fill="#0f5f2a"/>
+          <rect x="5" y="51" width="1" height="2" fill="#0f5f2a"/>
+          <rect x="6" y="52" width="1" height="1" fill="#0f5f2a"/>
+
+          <!-- tree 2 -->
+          <rect x="53" y="54" width="1" height="6" fill="#2a1a0a"/>
+          <rect x="51" y="52" width="1" height="1" fill="#0f5f2a"/>
+          <rect x="52" y="51" width="1" height="2" fill="#0f5f2a"/>
+          <rect x="53" y="50" width="1" height="3" fill="#0f5f2a"/>
+          <rect x="54" y="51" width="1" height="2" fill="#0f5f2a"/>
+          <rect x="55" y="52" width="1" height="1" fill="#0f5f2a"/>
+
+          <!-- tree 3 -->
+          <rect x="106" y="54" width="1" height="6" fill="#2a1a0a"/>
+          <rect x="104" y="52" width="1" height="1" fill="#0f5f2a"/>
+          <rect x="105" y="51" width="1" height="2" fill="#0f5f2a"/>
+          <rect x="106" y="50" width="1" height="3" fill="#0f5f2a"/>
+          <rect x="107" y="51" width="1" height="2" fill="#0f5f2a"/>
+          <rect x="108" y="52" width="1" height="1" fill="#0f5f2a"/>
+
+          <!-- tree 4 -->
+          <rect x="155" y="54" width="1" height="6" fill="#2a1a0a"/>
+          <rect x="153" y="52" width="1" height="1" fill="#0f5f2a"/>
+          <rect x="154" y="51" width="1" height="2" fill="#0f5f2a"/>
+          <rect x="155" y="50" width="1" height="3" fill="#0f5f2a"/>
+          <rect x="156" y="51" width="1" height="2" fill="#0f5f2a"/>
+          <rect x="157" y="52" width="1" height="1" fill="#0f5f2a"/>
+        </g>
+
+        <!-- ground / road -->
+        <rect x="0" y="60" width="160" height="4" fill="#1a1030"/>
+        <rect x="0" y="64" width="160" height="16" fill="#2a2040"/>
+        <rect x="0" y="60" width="160" height="1" fill="#4a3570"/>
+        <!-- road lane markings -->
+        <g fill="#fcd828">
+          <rect x="6" y="70" width="4" height="1"/>
+          <rect x="18" y="70" width="4" height="1"/>
+          <rect x="30" y="70" width="4" height="1"/>
+          <rect x="42" y="70" width="4" height="1"/>
+          <rect x="54" y="70" width="4" height="1"/>
+          <rect x="66" y="70" width="4" height="1"/>
+          <rect x="78" y="70" width="4" height="1"/>
+          <rect x="90" y="70" width="4" height="1"/>
+          <rect x="102" y="70" width="4" height="1"/>
+          <rect x="114" y="70" width="4" height="1"/>
+          <rect x="126" y="70" width="4" height="1"/>
+          <rect x="138" y="70" width="4" height="1"/>
+          <rect x="150" y="70" width="4" height="1"/>
+        </g>
+
+        <!-- ============ AUTO RICKSHAW ============ -->
+        <g>
+          <!-- body -->
+          <rect x="20" y="64" width="10" height="4" fill="#fcd828"/>
+          <rect x="22" y="62" width="8" height="2" fill="#0a6e3c"/>
+          <rect x="20" y="63" width="2" height="1" fill="#0a6e3c"/>
+          <!-- roof line -->
+          <rect x="23" y="61" width="6" height="1" fill="#0a6e3c"/>
+          <!-- windshield -->
+          <rect x="23" y="63" width="5" height="1" fill="#5c94fc"/>
+          <!-- meter/front -->
+          <rect x="19" y="65" width="1" height="2" fill="#000"/>
+          <!-- wheels -->
+          <rect x="21" y="68" width="2" height="2" fill="#000"/>
+          <rect x="27" y="68" width="2" height="2" fill="#000"/>
+          <rect x="21" y="68" width="2" height="1" fill="#5b3a1f"/>
+          <rect x="27" y="68" width="2" height="1" fill="#5b3a1f"/>
+          <!-- headlight -->
+          <rect x="19" y="64" width="1" height="1" fill="#fff0c8"/>
+        </g>
+
+        <!-- ============ CAR ============ -->
+        <g>
+          <rect x="110" y="65" width="14" height="3" fill="#e84444"/>
+          <rect x="112" y="63" width="10" height="2" fill="#e84444"/>
+          <rect x="113" y="64" width="3" height="1" fill="#5c94fc"/>
+          <rect x="118" y="64" width="3" height="1" fill="#5c94fc"/>
+          <rect x="111" y="68" width="2" height="2" fill="#000"/>
+          <rect x="121" y="68" width="2" height="2" fill="#000"/>
+          <rect x="124" y="65" width="1" height="1" fill="#fcd828"/>
+        </g>
+
+        <!-- tiny people dots -->
+        <g fill="#ff77a8">
+          <rect x="70" y="58" width="1" height="2"/>
+          <rect x="75" y="58" width="1" height="2"/>
+          <rect x="90" y="58" width="1" height="2"/>
+          <rect x="140" y="58" width="1" height="2"/>
+        </g>
+        <g fill="#5c94fc">
+          <rect x="72" y="58" width="1" height="2"/>
+          <rect x="92" y="58" width="1" height="2"/>
+          <rect x="142" y="58" width="1" height="2"/>
+        </g>
+
+        <!-- BANGALORE pixel banner on sky -->
+        <g fill="#f7f7f7" opacity="0.12">
+          <!-- subtle cloud blocks -->
+          <rect x="10" y="26" width="16" height="2"/>
+          <rect x="12" y="24" width="12" height="2"/>
+          <rect x="80" y="22" width="20" height="2"/>
+          <rect x="84" y="20" width="12" height="2"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="ticker">
+    <span>
+      <b>&#9654; LIVE NOW</b> <i>VIBECON (YC x EMERGENT)</i>
+      <b>&#9654; TOMORROW</b> <i>YC STARTUP SCHOOL @ NICE GROUNDS</i>
+      <b>&#9654; APR 25-26</b> <i>META OPENENV HACKATHON FINALE</i>
+      <b>&#9654; GIDS APR 21-24</b> <i>AWS SUMMIT APR 22-23</i>
+      <b>&#9654; WOMEN IN TECH MAY 14</b> <i>AI CAMP MAY 18</i>
+      <b>&#9654; AMD AI SPRINT JUL 19</b> <i>BTS NOV 17-19</i>
+      <b>&#9654; INSERT COIN TO CONTINUE</b> <i>NAMMA BENGALURU</i>
+    </span>
+  </div>
+</header>
+
+<main>
+
+  <!-- FILTERS -->
+  <div class="filters" role="toolbar" aria-label="Filter events by category">
+    <span class="filter-label">&gt; FILTER:</span>
+    <button class="filter-btn active" data-filter="all">ALL</button>
+    <button class="filter-btn" data-filter="hackathon">HACKATHON</button>
+    <button class="filter-btn" data-filter="meetup">MEETUP</button>
+    <button class="filter-btn" data-filter="talk">TALK</button>
+    <button class="filter-btn" data-filter="workshop">WORKSHOP</button>
+    <button class="filter-btn" data-filter="conference">CONFERENCE</button>
+    <button class="filter-btn" data-filter="summit">SUMMIT</button>
+  </div>
+
+  <!-- UPCOMING -->
+  <div class="section-head">
+    <h2 class="px" style="color:var(--green)">&gt; UPCOMING</h2>
+    <span class="chip up px">WORLD 2-1</span>
+  </div>
+
+  <div class="grid" id="upcoming">
+
+    <article class="card live" data-category="hackathon">
+      <span class="cat cat-hackathon">HACKATHON</span>
+      <div class="date" style="color:var(--yellow)">APR 16 - 17, 2026 &middot; LIVE</div>
+      <h3>VIBECON INDIA</h3>
+      <p>YC &times; Emergent vibe-coding hackathon. 300 hand-picked builders from 20,000 applicants. Winner gets a direct YC interview + $5K + a Bengaluru billboard.</p>
+      <div class="row">
+        <span class="venue">&#9733; Bengaluru</span>
+        <a class="status live" href="https://www.indianstartuptimes.com/news/y-combinator-interview-up-for-grabs-as-vibecon-india-debuts-in-bengaluru/" target="_blank" rel="noopener">LIVE NOW!</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="conference">
+      <span class="cat cat-conference">CONFERENCE</span>
+      <div class="date">APR 18, 2026 &middot; TOMORROW</div>
+      <h3>YC STARTUP SCHOOL INDIA</h3>
+      <p>Y Combinator&apos;s first physical India event in 20 years. Free, full-day, 2000 founders. Talks from YC partners + Razorpay, Meesho, Groww founders.</p>
+      <div class="row">
+        <span class="venue">&#9733; NICE Grounds, Bengaluru</span>
+        <a class="status up" href="https://events.ycombinator.com/yc-sus-india" target="_blank" rel="noopener">UPCOMING &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="conference">
+      <span class="cat cat-conference">CONFERENCE</span>
+      <div class="date">APR 21 - 24, 2026</div>
+      <h3>GIDS 2026</h3>
+      <p>Great International Developer Summit — 4-day mega conference for builders, architects, and AI tinkerers.</p>
+      <div class="row">
+        <span class="venue">&#9733; J.N. Tata Auditorium</span>
+        <a class="status up" href="https://10times.com/gids-bengaluru" target="_blank" rel="noopener">UPCOMING &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="summit">
+      <span class="cat cat-summit">SUMMIT</span>
+      <div class="date">APR 22 - 23, 2026</div>
+      <h3>AWS SUMMIT BENGALURU</h3>
+      <p>Cloud innovation, agentic AI, 150+ sessions. Free to attend. Power-up unlocked.</p>
+      <div class="row">
+        <span class="venue">&#9733; BIEC, Bengaluru</span>
+        <a class="status up" href="https://aws.amazon.com/events/summits/bengaluru/" target="_blank" rel="noopener">UPCOMING &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="hackathon">
+      <span class="cat cat-hackathon">HACKATHON</span>
+      <div class="date">APR 25 - 26, 2026</div>
+      <h3>OPENENV AI HACKATHON FINALE</h3>
+      <p>Meta &times; PyTorch &times; Hugging Face &times; Scaler. 48-hour in-person finale. $30K prize pool + interview opportunity with Meta &amp; Hugging Face AI teams.</p>
+      <div class="row">
+        <span class="venue">&#9733; Scaler School of Tech, Bengaluru</span>
+        <a class="status up" href="https://www.scaler.com/school-of-technology/meta-pytorch-hackathon" target="_blank" rel="noopener">UPCOMING &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="conference">
+      <span class="cat cat-conference">CONFERENCE</span>
+      <div class="date">MAY 13 - 15, 2026</div>
+      <h3>INDIA ELECTRONICS WEEK</h3>
+      <p>Hardware, embedded, IoT and EV tech. Soldering iron required (metaphorically).</p>
+      <div class="row">
+        <span class="venue">&#9733; KTPO, Whitefield</span>
+        <a class="status up" href="https://10times.com/bengaluru-in/technology" target="_blank" rel="noopener">UPCOMING &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="meetup">
+      <span class="cat cat-meetup">MEETUP</span>
+      <div class="date">MAY 14, 2026</div>
+      <h3>WOMEN IN TECH CONNECT</h3>
+      <p>Evening meetup for women building in tech across Bangalore. Network, mentor, level up.</p>
+      <div class="row">
+        <span class="venue">&#9733; Koramangala</span>
+        <a class="status up" href="https://www.meetup.com/find/in--bangalore/technology/" target="_blank" rel="noopener">UPCOMING &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="meetup">
+      <span class="cat cat-meetup">MEETUP</span>
+      <div class="date">MAY 18, 2026</div>
+      <h3>AI CAMP: GenAI + LLMs</h3>
+      <p>Deep dive into LLMs, agents, and production ML. Hosted by AICamp Bengaluru.</p>
+      <div class="row">
+        <span class="venue">&#9733; Indiranagar</span>
+        <a class="status up" href="https://www.aicamp.ai/" target="_blank" rel="noopener">UPCOMING &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="hackathon">
+      <span class="cat cat-hackathon">HACKATHON</span>
+      <div class="date">JUL 19, 2026</div>
+      <h3>AMD AI SPRINT HACKATHON</h3>
+      <p>Hackathon + workshop series on AMD hardware for AI workloads. Hosted by AICamp.</p>
+      <div class="row">
+        <span class="venue">&#9733; Bengaluru</span>
+        <a class="status up" href="https://www.aicamp.ai/" target="_blank" rel="noopener">UPCOMING &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="summit">
+      <span class="cat cat-summit">SUMMIT</span>
+      <div class="date">NOV 17 - 19, 2026</div>
+      <h3>BENGALURU TECH SUMMIT</h3>
+      <p>29th edition. Asia&rsquo;s biggest tech + innovation show. 50K+ visitors, 1200+ exhibitors.</p>
+      <div class="row">
+        <span class="venue">&#9733; BIEC, Bengaluru</span>
+        <a class="status up" href="https://www.bengalurutechsummit.com/" target="_blank" rel="noopener">UPCOMING &gt;</a>
+      </div>
+    </article>
+
+    <!-- ===== Luma feed ===== -->
+
+    <article class="card upcoming" data-category="hackathon">
+      <span class="cat cat-hackathon">HACKATHON</span>
+      <div class="date">UPCOMING &middot; SOLD OUT</div>
+      <h3>AGENTIC SUMMER: ELEVENLABS BUILDATHON #1</h3>
+      <p>Voice AI buildathon with ElevenLabs. Ship agents that talk. 98+ going, waitlist only.</p>
+      <div class="row">
+        <span class="venue">&#9733; Indiranagar</span>
+        <a class="status up" href="https://luma.com/bengaluru" target="_blank" rel="noopener">LUMA &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="hackathon">
+      <span class="cat cat-hackathon">HACKATHON</span>
+      <div class="date">UPCOMING &middot; &#8377;2L PRIZE</div>
+      <h3>LYZR AGENTATHON</h3>
+      <p>Vibe-coding challenge with a 2 lakh prize pool. 436+ builders signed up. Open registration.</p>
+      <div class="row">
+        <span class="venue">&#9733; Polaris School of Technology</span>
+        <a class="status up" href="https://luma.com/bengaluru" target="_blank" rel="noopener">LUMA &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="hackathon">
+      <span class="cat cat-hackathon">HACKATHON</span>
+      <div class="date">UPCOMING &middot; SOLD OUT</div>
+      <h3>HACKBLR</h3>
+      <p>Bangalore&apos;s flagship developer hackathon. Ship something shippable in one weekend.</p>
+      <div class="row">
+        <span class="venue">&#9733; Zintlr Pvt Ltd</span>
+        <a class="status up" href="https://luma.com/bengaluru" target="_blank" rel="noopener">LUMA &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="talk">
+      <span class="cat cat-talk">TALK</span>
+      <div class="date">UPCOMING &middot; SOLD OUT</div>
+      <h3>OPERATIONAL AI: REAL-TIME ANALYTICS</h3>
+      <p>Deep dive on running AI + streaming analytics in production. 412+ RSVPs at Nutanix.</p>
+      <div class="row">
+        <span class="venue">&#9733; Nutanix Technologies India</span>
+        <a class="status up" href="https://luma.com/bengaluru" target="_blank" rel="noopener">LUMA &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="talk">
+      <span class="cat cat-talk">TALK</span>
+      <div class="date">UPCOMING &middot; WAITLIST</div>
+      <h3>VIBE CODING: IS YOUR AGENT LYING?</h3>
+      <p>Honest look at AI agent reliability, hallucination, and eval failures. 97+ on waitlist.</p>
+      <div class="row">
+        <span class="venue">&#9733; Titan World, HSR Layout</span>
+        <a class="status up" href="https://luma.com/bengaluru" target="_blank" rel="noopener">LUMA &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="talk">
+      <span class="cat cat-talk">TALK</span>
+      <div class="date">UPCOMING &middot; SOLD OUT</div>
+      <h3>BUILDING A MEDIA COMPANY INSIDE YOUR STARTUP</h3>
+      <p>The world is a show business. Content + distribution strategy for founders. 70+ going.</p>
+      <div class="row">
+        <span class="venue">&#9733; Bengaluru</span>
+        <a class="status up" href="https://luma.com/bengaluru" target="_blank" rel="noopener">LUMA &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="workshop">
+      <span class="cat cat-workshop">WORKSHOP</span>
+      <div class="date">UPCOMING</div>
+      <h3>ZERO TO AGENT BENGALURU</h3>
+      <p>Hands-on workshop w/ The AI Collective. Zero to working agent in one session.</p>
+      <div class="row">
+        <span class="venue">&#9733; HSR Layout</span>
+        <a class="status up" href="https://luma.com/bengaluru" target="_blank" rel="noopener">LUMA &gt;</a>
+      </div>
+    </article>
+
+    <article class="card upcoming" data-category="workshop">
+      <span class="cat cat-workshop">WORKSHOP</span>
+      <div class="date">UPCOMING &middot; SOLD OUT</div>
+      <h3>ZERODHA BOOTCAMP &mdash; BLR EDITION</h3>
+      <p>Technical bootcamp by Zerodha. Systems, trading infra, and engineering culture.</p>
+      <div class="row">
+        <span class="venue">&#9733; Bangalore International Centre</span>
+        <a class="status up" href="https://luma.com/bengaluru" target="_blank" rel="noopener">LUMA &gt;</a>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- PAST -->
+  <div class="section-head">
+    <h2 class="px" style="color:var(--red)">&gt; PAST RUNS</h2>
+    <span class="chip past px">GAME OVER</span>
+  </div>
+
+  <div class="grid" id="past">
+
+    <article class="card past" data-category="hackathon">
+      <span class="cat cat-hackathon">HACKATHON</span>
+      <div class="date">APR 16, 2026 &middot; YESTERDAY</div>
+      <h3>OPENAI CODEX HACKATHON</h3>
+      <p>Co-hosted with GrowthX.club. Day-long intensive build sprint with OpenAI Codex. API credits + ChatGPT Pro for every builder. Cap: tight, approval-only.</p>
+      <div class="row">
+        <span class="venue">&#9733; Bengaluru</span>
+        <span class="status past">PAST</span>
+      </div>
+    </article>
+
+    <article class="card past" data-category="talk">
+      <span class="cat cat-talk">TALK</span>
+      <div class="date">APR 10, 2026</div>
+      <h3>BANGALORE TECH SYMPOSIUM</h3>
+      <p>Afternoon symposium on engineering leadership + system design.</p>
+      <div class="row">
+        <span class="venue">&#9733; Electronic City</span>
+        <span class="status past">PAST</span>
+      </div>
+    </article>
+
+    <article class="card past" data-category="hackathon">
+      <span class="cat cat-hackathon">HACKATHON</span>
+      <div class="date">APR 08, 2026</div>
+      <h3>WOMENHACK BANGALORE</h3>
+      <p>Speed-dating-meets-hiring for women in tech. Recruiter booth blitz.</p>
+      <div class="row">
+        <span class="venue">&#9733; HSR Layout</span>
+        <span class="status past">PAST</span>
+      </div>
+    </article>
+
+    <article class="card past" data-category="meetup">
+      <span class="cat cat-meetup">MEETUP</span>
+      <div class="date">APR 04, 2026</div>
+      <h3>eCHAI STARTUP MEETUP</h3>
+      <p>Saturday evening startup meetup on team building + company culture.</p>
+      <div class="row">
+        <span class="venue">&#9733; Indiranagar</span>
+        <span class="status past">PAST</span>
+      </div>
+    </article>
+
+    <article class="card past" data-category="hackathon">
+      <span class="cat cat-hackathon">HACKATHON</span>
+      <div class="date">MAR 25, 2026</div>
+      <h3>THE STUPID HACKATHON</h3>
+      <p>8-hour hackathon for intentionally useless, weird, creative projects. Prize pool &#8377;10k+.</p>
+      <div class="row">
+        <span class="venue">&#9733; Acharya Institute of Tech</span>
+        <span class="status past">PAST</span>
+      </div>
+    </article>
+
+    <article class="card past" data-category="summit">
+      <span class="cat cat-summit">SUMMIT</span>
+      <div class="date">MAR 14, 2026</div>
+      <h3>FUTURESCOPE &apos;26</h3>
+      <p>AI + Product + Business Analysis summit. Hosted by Techcanvass.</p>
+      <div class="row">
+        <span class="venue">&#9733; Bengaluru</span>
+        <span class="status past">PAST</span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- submit event CTA -->
+  <div class="box" style="margin-top:60px;text-align:center">
+    <h2 class="px" style="color:var(--yellow);margin-bottom:14px;font-size:14px">&gt; GOT AN EVENT?</h2>
+    <p style="margin-bottom:20px;color:#d8d2f0;font-size:20px">Running a meetup, hackathon, or conference in Bangalore? Ship it to the homepage.</p>
+    <a class="btn" href="https://tally.so/r/q4EAa8" target="_blank" rel="noopener">&#9654; SUBMIT EVENT</a>
+  </div>
+
+</main>
+
+<script>
+  (function(){
+    var btns = document.querySelectorAll('.filter-btn');
+    var cards = document.querySelectorAll('.card');
+    btns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var f = btn.getAttribute('data-filter');
+        btns.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        cards.forEach(function(c){
+          if(f === 'all' || c.getAttribute('data-category') === f){
+            c.classList.remove('hidden');
+          } else {
+            c.classList.add('hidden');
+          }
+        });
+      });
+    });
+  })();
+</script>
+
+<footer>
+  BUILT WITH <span class="heart">&#9829;</span> IN NAMMA BENGALURU <br>
+  <a href="https://bangalore.sh">bangalore.sh</a> &middot; 8-BIT EDITION &middot; &copy; 2026
+</footer>
+
+</body>
+</html>
